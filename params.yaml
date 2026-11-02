@@ -1,0 +1,11 @@
+R_s: 0.50
+R_o: 0.45
+R_c: 0.10
+N: 12
+beta_deg: 70
+rib_thickness: 0.015
+slit_width: 0.02
+wave_A: 0.0
+wave_lambda: 0.1
+wind_speeds: [2.0, 3.5, 5.0]
+wind_angles_deg: [0.0, 7.5, 15.0]

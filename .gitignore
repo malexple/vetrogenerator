@@ -1,0 +1,4 @@
+results/*/
+*.foam
+processor*/
+__pycache__/
