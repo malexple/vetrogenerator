@@ -1,0 +1,205 @@
+nohup: ignoring input
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4221160
+    boundary patches: 10
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to4', 'processor'), ('procBoundary0to5', 'processor'), ('procBoundary0to6', 'processor')]
+U=3.5 м/с, k=0.04594, omega=3.913, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1301.1047 s  ClockTime = 1301 s
+ExecutionTime = 1305.2831 s  ClockTime = 1305 s
+End
+
+{
+  "case": "t3_a7",
+  "time": "600",
+  "vinf": 3.5,
+  "cells_in_cylinder": 270336,
+  "vtheta_mean": 0.6343365609668961,
+  "vtheta_abs_mean": 0.6365355292426322,
+  "vtheta_max": 1.2091051804066295,
+  "vtheta_min": -0.3275799678834386,
+  "vz_mean": 0.0115980686728603,
+  "speed_max": 1.2847100357723302,
+  "swirl_number_S": 8.76905562738818
+}
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4261320
+    boundary patches: 9
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to4', 'processor'), ('procBoundary0to5', 'processor')]
+U=3.5 м/с, k=0.04594, omega=3.913, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1323.6024 s  ClockTime = 1323 s
+ExecutionTime = 1327.823 s  ClockTime = 1327 s
+End
+
+{
+  "case": "t3_a15",
+  "time": "600",
+  "vinf": 3.5,
+  "cells_in_cylinder": 271872,
+  "vtheta_mean": 0.6495179278160438,
+  "vtheta_abs_mean": 0.6518237030273573,
+  "vtheta_max": 1.2599224611472564,
+  "vtheta_min": -0.3087809670258517,
+  "vz_mean": 0.009469322645801791,
+  "speed_max": 1.3162290929232066,
+  "swirl_number_S": 5.588510826869353
+}
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4317834
+    boundary patches: 9
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to5', 'processor'), ('procBoundary0to7', 'processor')]
+U=3.5 м/с, k=0.04594, omega=3.913, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1362.7469 s  ClockTime = 1363 s
+ExecutionTime = 1367.0218 s  ClockTime = 1367 s
+End
+
+{
+  "case": "t4_a7",
+  "time": "600",
+  "vinf": 3.5,
+  "cells_in_cylinder": 270336,
+  "vtheta_mean": 0.7062891794839536,
+  "vtheta_abs_mean": 0.707432552415456,
+  "vtheta_max": 1.1934149631926105,
+  "vtheta_min": -0.2863556807995183,
+  "vz_mean": 0.05768981704335532,
+  "speed_max": 1.1986844997750812,
+  "swirl_number_S": 4.401261081085073
+}
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4357859
+    boundary patches: 10
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to5', 'processor'), ('procBoundary0to6', 'processor'), ('procBoundary0to7', 'processor')]
+U=3.5 м/с, k=0.04594, omega=3.913, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1377.4726 s  ClockTime = 1378 s
+ExecutionTime = 1381.8421 s  ClockTime = 1382 s
+End
+
+{
+  "case": "t4_a15",
+  "time": "600",
+  "vinf": 3.5,
+  "cells_in_cylinder": 271872,
+  "vtheta_mean": 0.7317160737623218,
+  "vtheta_abs_mean": 0.7323588444319648,
+  "vtheta_max": 1.0660708814619544,
+  "vtheta_min": -0.21954120334931587,
+  "vz_mean": 0.03912922476415702,
+  "speed_max": 1.116232421425526,
+  "swirl_number_S": 5.58290931100093
+}
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4245531
+    boundary patches: 10
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to4', 'processor'), ('procBoundary0to6', 'processor'), ('procBoundary0to7', 'processor')]
+U=2.0 м/с, k=0.015, omega=2.236, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1327.7537 s  ClockTime = 1327 s
+ExecutionTime = 1331.9805 s  ClockTime = 1332 s
+End
+
+{
+  "case": "t3_v2",
+  "time": "600",
+  "vinf": 2.0,
+  "cells_in_cylinder": 269568,
+  "vtheta_mean": 0.6193212537460316,
+  "vtheta_abs_mean": 0.6211560189858085,
+  "vtheta_max": 1.2866116345806822,
+  "vtheta_min": -0.2629747573851272,
+  "vz_mean": 0.02468819056307965,
+  "speed_max": 1.2874390028578355,
+  "swirl_number_S": 7.889879059874242
+}
+>> blockMesh
+>> decomposePar -force
+>> mpirun --allow-run-as-root -np 8 snappyHexMesh -parallel -overwrite
+>> mpirun --allow-run-as-root -np 8 checkMesh -parallel -latestTime
+>> reconstructParMesh -constant
+    cells:            4245531
+    boundary patches: 10
+Checking basic patch addressing...
+Mesh OK.
+
+Патчи:     inlet
+    outlet
+    sides
+
+Патчи: [('inlet', 'patch'), ('outlet', 'patch'), ('sides', 'patch'), ('shell', 'wall'), ('procBoundary0to1', 'processor'), ('procBoundary0to2', 'processor'), ('procBoundary0to3', 'processor'), ('procBoundary0to4', 'processor'), ('procBoundary0to6', 'processor'), ('procBoundary0to7', 'processor')]
+U=5.0 м/с, k=0.09375, omega=5.59, стенки: ['shell']
+>> mpirun --allow-run-as-root -np 8 foamRun -parallel
+ExecutionTime = 1328.175 s  ClockTime = 1329 s
+ExecutionTime = 1332.3993 s  ClockTime = 1333 s
+End
+
+{
+  "case": "t3_v5",
+  "time": "600",
+  "vinf": 5.0,
+  "cells_in_cylinder": 269568,
+  "vtheta_mean": 0.6235790099024355,
+  "vtheta_abs_mean": 0.6255159974334898,
+  "vtheta_max": 1.3408615565298727,
+  "vtheta_min": -0.42520197240904734,
+  "vz_mean": 0.021361128668825634,
+  "speed_max": 1.3412848977205305,
+  "swirl_number_S": 1.91705542548799
+}

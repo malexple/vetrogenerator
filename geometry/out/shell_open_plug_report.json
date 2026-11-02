@@ -1,0 +1,51 @@
+{
+  "name": "shell_open_plug",
+  "params": {
+    "R_s": 0.5,
+    "R_o": 0.45,
+    "R_c": 0.1,
+    "N": 12,
+    "beta_deg": 65,
+    "rib_thickness": 0.01,
+    "slit_width": 0.02,
+    "wave_A": 0.0,
+    "wave_lambda": 0.1,
+    "shell_t": 0.01,
+    "tube_t": 0.01,
+    "plate_t": 0.02,
+    "spoke_w": 0.01,
+    "seg": 96,
+    "pts": 240,
+    "plug_deg": 90.0,
+    "tube": 0,
+    "wind_speeds": [
+      2.0,
+      3.5,
+      5.0
+    ],
+    "wind_angles_deg": [
+      0.0,
+      7.5,
+      15.0
+    ]
+  },
+  "control": false,
+  "watertight": true,
+  "winding_consistent": true,
+  "volume_m3": 0.10038708273444462,
+  "bodies": 1,
+  "faces": 36656,
+  "bounds": [
+    [
+      -0.44999998807907104,
+      -0.44999998807907104,
+      -0.49989795684814453
+    ],
+    [
+      0.44999998807907104,
+      0.44999998807907104,
+      0.49495163559913635
+    ]
+  ],
+  "symmetry_overlap": 0.9866083512152646
+}

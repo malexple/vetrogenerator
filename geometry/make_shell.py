@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULTS = dict(R_s=0.50, R_o=0.45, R_c=0.10, N=12, beta_deg=65.0,
                 rib_thickness=0.010, slit_width=0.02, wave_A=0.0, wave_lambda=0.1,
                 shell_t=0.010, tube_t=0.010, plate_t=0.020, spoke_w=0.010,
-                seg=96, pts=240)
+                seg=96, pts=240, plug_deg=0.0, tube=0)
 
 
 def load_params(path):
@@ -85,7 +85,13 @@ def build(p, control=False):
     slit = (cyl(Rc, 4 * tp) - cyl(Rc - p["slit_width"], 4 * tp)) - spokes
     plate = plate - slit.translate((0, 0, zb))
 
-    parts = [caps, tube, plate]
+    parts = [caps, plate] + ([tube] if p.get("tube", 0) else [])
+    if p.get("plug_deg", 0) > 0:
+        a_ = np.radians(p["plug_deg"])
+        ang = np.linspace(-a_, a_, 24)
+        poly = np.vstack([[0, 0], np.column_stack([2 * Ro * np.cos(ang), 2 * Ro * np.sin(ang)])])
+        wedge = Manifold.extrude(CrossSection([poly]), H).translate((0, 0, -H / 2))
+        parts.append(((cyl(Ro) - cyl(Ro - 0.012)) ^ wedge) ^ sph_out)
     if not control:
         sph = Manifold.sphere(Rs, seg)
         clip = cyl(Ro)
@@ -98,7 +104,7 @@ def build(p, control=False):
 
 def to_trimesh(m):
     me = m.to_mesh()
-    return trimesh.Trimesh(np.asarray(me.vert_properties)[:, :3], np.asarray(me.tri_verts), process=True)
+    return trimesh.Trimesh(np.asarray(me.vert_properties)[:, :3], np.asarray(me.tri_verts), process=False)
 
 
 def save_sections(tm, base):
