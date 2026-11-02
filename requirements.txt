@@ -1,4 +1,6 @@
 numpy
 scipy
 trimesh
+manifold3d
 pyyaml
+matplotlib
