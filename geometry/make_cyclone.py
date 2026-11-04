@@ -10,7 +10,7 @@ P = dict(H=300.0, R_bot=28.0, R_top=70.0, R_bulge=160.0, N=12, vane_t=1.8, wall_
          sweep_deg=35.0, macro_twist=1.2, bulge_pow=1.0,
          twist_deg_per_cm=2.0, twist_accel=0.0,
          wave_A=3.0, wave_lambda=40.0, crest_deg=60.0, wave_ramp=20.0, wave_phase_deg=0.0,
-         door_h_frac=0.10, door_fill=0.5, door_every=1, door_angle_deg=30.0, door_lift=8.0, door_t=1.5,
+         door_h_frac=0.10, door_fill=0.5, door_every=1, door_angle_deg=30.0, door_pitch_deg=30.0, door_t=1.5,
          Nz=60, Ns=16, units=1e-3)
 
 
@@ -122,14 +122,66 @@ def wall_panel(z0, z1, a0, a1, p, nz=8, na=6):
 
 
 def door_flap(phi_h, z0, z1, width, p):
-    """Дверца: вертикальная петля при угле phi_h, свободный край отведён внутрь и приподнят; поток идёт по часовой."""
-    al = math.radians(p["door_angle_deg"])
-    er = np.array([math.cos(phi_h), math.sin(phi_h), 0.0])
-    et = np.array([-math.sin(phi_h), math.cos(phi_h), 0.0])
-    d = width * (math.cos(al) * (-et) + math.sin(al) * (-er)) + np.array([0, 0, p["door_lift"]])
-    H0 = r_cone(z0, p) * er + np.array([0, 0, z0]) - er * p["wall_t"] * 0.4
-    H1 = r_cone(z1, p) * er + np.array([0, 0, z1]) - er * p["wall_t"] * 0.4
-    S = np.array([[H0, H0 + d], [H1, H1 + d]])
+    """
+    Дверца с двумя независимыми углами:
+    door_angle_deg — поворот открытия в горизонтальной плоскости;
+    door_pitch_deg — подъём свободной кромки над горизонтальной плоскостью.
+
+    Положительный pitch направляет свободную кромку вверх.
+    Вертикальная петля остаётся на стенке конуса.
+    """
+    yaw = math.radians(p["door_angle_deg"])
+    pitch = math.radians(p["door_pitch_deg"])
+
+    # Локальные направления в точке крепления
+    er = np.array([
+        math.cos(phi_h),
+        math.sin(phi_h),
+        0.0
+    ])                                      # наружу по радиусу
+
+    et = np.array([
+        -math.sin(phi_h),
+        math.cos(phi_h),
+        0.0
+    ])                                      # по касательной
+
+    ez = np.array([0.0, 0.0, 1.0])
+
+    # Направление открытия в горизонтальной плоскости.
+    # Сохраняется прежнее направление: внутрь и по часовой стрелке.
+    horizontal = (
+            math.cos(yaw) * (-et)
+            + math.sin(yaw) * (-er)
+    )
+
+    # Поднимаем свободную кромку на угол pitch.
+    # Длина самой дверцы остаётся равной width.
+    d = width * (
+            math.cos(pitch) * horizontal
+            + math.sin(pitch) * ez
+    )
+
+    # Вертикальная петля
+    hinge_offset = -er * p["wall_t"] * 0.4
+
+    H0 = (
+            r_cone(z0, p) * er
+            + np.array([0.0, 0.0, z0])
+            + hinge_offset
+    )
+
+    H1 = (
+            r_cone(z1, p) * er
+            + np.array([0.0, 0.0, z1])
+            + hinge_offset
+    )
+
+    S = np.array([
+        [H0, H0 + d],
+        [H1, H1 + d]
+    ])
+
     return thick_sheet(S, p["door_t"])
 
 
@@ -184,6 +236,20 @@ def checks(solids, names, p):
     rep["clearance_vane0_vane1_mm"] = round(float(d.min()) - p["vane_t"], 2)
     allv = np.vstack([V for V, T in solids])
     rep["bbox_mm"] = [np.round(allv.min(0), 1).tolist(), np.round(allv.max(0), 1).tolist()]
+    pitch_angle = 2 * np.pi / int(p["N"])
+    half = 0.5 * p["door_fill"] * pitch_angle
+    door_width = 2 * r_cone(p["floor_t"], p) * math.sin(half)
+
+    gamma = math.radians(p["door_pitch_deg"])
+
+    rep["door_width_mm"] = round(door_width, 3)
+    rep["door_pitch_deg"] = p["door_pitch_deg"]
+    rep["door_free_edge_lift_mm"] = round(
+        door_width * math.sin(gamma), 3
+    )
+    rep["door_horizontal_reach_mm"] = round(
+        door_width * math.cos(gamma), 3
+    )
     return rep
 
 
