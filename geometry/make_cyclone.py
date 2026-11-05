@@ -90,7 +90,7 @@ def vane_sheet(v, p):
     phi = 2 * np.pi * v / N - p["macro_twist"] * t
     er = np.column_stack([np.cos(phi), np.sin(phi), np.zeros_like(phi)])
     et = np.column_stack([-np.sin(phi), np.cos(phi), np.zeros_like(phi)])
-    dirh = math.cos(b) * er - math.sin(b) * et
+    dirh = math.cos(b) * er + math.sin(b) * et
     nh = np.column_stack([-dirh[:, 1], dirh[:, 0], np.zeros_like(phi)])
     root = np.column_stack([rr * np.cos(phi), rr * np.sin(phi), z])
     ell = L[:, None] * s[None, :]
